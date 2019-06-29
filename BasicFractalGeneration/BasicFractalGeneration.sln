@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.329
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "BasicFractalGeneration", "BasicFractalGeneration\BasicFractalGeneration.pyproj", "{55BBC660-4A32-456C-8F78-EDCA40DEE0E6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{55BBC660-4A32-456C-8F78-EDCA40DEE0E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55BBC660-4A32-456C-8F78-EDCA40DEE0E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {87EAF33E-2205-4AD3-80D2-1499E63AF38D}
+	EndGlobalSection
+EndGlobal
