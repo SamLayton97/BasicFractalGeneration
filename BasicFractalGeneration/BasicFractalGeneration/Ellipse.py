@@ -15,7 +15,7 @@ class Ellipse(StaticShape):
 		super().__init__(surface, position, color, width)
 
 		# generate ellipse's bounding rect from parameters
-		self.boundingRect = pygame.rect(position.x - dimensions.x, position.y + dimensions.y,
+		self.boundingRect = pygame.Rect(position.x - dimensions.x, position.y - dimensions.y,
 								dimensions.x * 2, dimensions.y * 2)
 
 	def draw(self, surface):
