@@ -21,18 +21,29 @@ clock = pygame.time.Clock()
 shapes = []
 
 # Recursively draws circles in horizontal line
-def circleLine(position, radius):
+def circleHLine(position, radius):
 	# create circle
 	shapes.append(Circle(screen, position, radius, 1, Constants.COLOR_WHITE))
-	print(position)
 
 	# if next circles would be visible, draw next set
 	if radius >= 2:
 		circleLine(position + Vector(radius, 0), radius / 2)
 		circleLine(position - Vector(radius, 0), radius / 2)
 
-# draw horizontal line of circles starting centre screen
-circleLine(Vector(Constants.SCREEN_SIZE[0] / 2, Constants.SCREEN_SIZE[1] / 2), 300)
+# Recursively draws circles in diamond
+def circleDiamond(position, radius):
+	# create circle
+	shapes.append(Circle(screen, position, radius, 1, Constants.COLOR_WHITE))
+
+	# if next circles would be visible, draw next set
+	if radius >= 2:
+		circleDiamond(position + Vector(radius, 0), radius / 2)
+		circleDiamond(position - Vector(radius, 0), radius / 2)
+		circleDiamond(position + Vector(0, radius), radius / 2)
+		circleDiamond(position - Vector(0, radius), radius / 2)
+
+# test current shape-drawing function
+circleDiamond(Vector(Constants.SCREEN_SIZE[0] / 2, Constants.SCREEN_SIZE[1] / 2), 150)
 
 # while user has not closed application
 hasQuit = False
