@@ -2,7 +2,7 @@
 
 # display constants
 APP_NAME = "Basic Fractal Generation"
-SCREEN_SIZE = [800, 800]
+SCREEN_SIZE = [800, 600]
 FRAME_RATE = 60
 
 # basic colors
