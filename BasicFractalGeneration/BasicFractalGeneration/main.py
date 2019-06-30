@@ -2,20 +2,23 @@
 # A basic fractal generation program
 
 import pygame
+import Constants
 
 from pygame import *
 
 # initialize pygame
 pygame.init()
 
-screen = pygame.display.set_mode([800, 600])
+# set display parameters
+pygame.display.set_caption(Constants.APP_NAME)
+screen = pygame.display.set_mode(Constants.SCREEN_SIZE)
 clock = pygame.time.Clock()
 
 # while user has not closed application
 hasQuit = False
 while not hasQuit:
 	# wipe screen of previous frame
-	screen.fill((0, 0, 0))
+	screen.fill(Constants.SCREEN_COLOR)
 	
 	# process all in-game events
 	for event in pygame.event.get():
@@ -27,7 +30,7 @@ while not hasQuit:
 	pygame.display.flip()
 
 	# limit screen-refresh to 60 fps
-	clock.tick(60)
+	clock.tick(Constants.FRAME_RATE)
 
 # quit after exiting main app loop
 pygame.quit()
