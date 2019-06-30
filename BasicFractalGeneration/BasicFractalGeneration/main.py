@@ -2,13 +2,9 @@
 import pygame
 import Constants
 import RecursiveShapes
-import Ellipse
-import Circle
 
 from pygame import *
 from RecursiveShapes import *
-from Ellipse import *
-from Circle import *
 
 # initialize pygame
 pygame.init()
