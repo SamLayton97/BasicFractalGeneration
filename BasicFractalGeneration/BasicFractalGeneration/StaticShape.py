@@ -20,7 +20,7 @@ class StaticShape:
 		self.surface = surface
 		self.position = position
 		self.color = color
-		self.width = math.fabs(width)
+		self.width = int(math.fabs(width))
 
 	# Draws shape onto specified surface.
 	# All child classes must override this method.
