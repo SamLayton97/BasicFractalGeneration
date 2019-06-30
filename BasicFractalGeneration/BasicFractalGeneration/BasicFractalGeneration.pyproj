@@ -31,6 +31,9 @@
     <Compile Include="RecursiveShapes.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="StaticShape.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Vector.py">
       <SubType>Code</SubType>
     </Compile>
