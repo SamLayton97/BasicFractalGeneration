@@ -18,7 +18,7 @@ screen = pygame.display.set_mode(Constants.SCREEN_SIZE)
 clock = pygame.time.Clock()
 
 # create a circle
-circle = Circle(screen, Vector(400, 300), 50, 3, Constants.COLOR_WHITE, False)
+circle = Circle(screen, Vector(400, 300), 50, 1, Constants.COLOR_WHITE)
 
 # while user has not closed application
 hasQuit = False
@@ -31,6 +31,9 @@ while not hasQuit:
 		if event.type == pygame.QUIT \
 			or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
 			hasQuit = True
+
+	# draws test circle onto screen
+	circle.update(screen)
 
 	# double buffer
 	pygame.display.flip()
