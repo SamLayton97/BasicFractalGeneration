@@ -2,8 +2,12 @@
 
 import pygame
 import Constants
+import Vector
+import Circle
 
 from pygame import *
+from Vector import *
+from Circle import *
 
 # initialize pygame
 pygame.init()
@@ -13,11 +17,14 @@ pygame.display.set_caption(Constants.APP_NAME)
 screen = pygame.display.set_mode(Constants.SCREEN_SIZE)
 clock = pygame.time.Clock()
 
+# create a circle
+circle = Circle(screen, Vector(400, 300), 50, 3, Constants.COLOR_WHITE, False)
+
 # while user has not closed application
 hasQuit = False
 while not hasQuit:
 	# wipe screen of previous frame
-	screen.fill(Constants.SCREEN_COLOR)
+	screen.fill(Constants.COLOR_BLACK)
 	
 	# process all in-game events
 	for event in pygame.event.get():
