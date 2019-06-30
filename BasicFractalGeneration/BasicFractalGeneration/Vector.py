@@ -47,3 +47,10 @@ class Vector:
 			return Vector(self.x / vectorLength, self.y / vectorLength)
 		else:
 			return Vector(0, 0)
+
+# A 2-D vector contrained to whole numbers.
+class VectorInt(Vector):
+
+	# Constructor override, rounding points values to nearest integer
+	def __init__(self, x, y):
+		super().__init__(int(round(x)), int(round(y)))

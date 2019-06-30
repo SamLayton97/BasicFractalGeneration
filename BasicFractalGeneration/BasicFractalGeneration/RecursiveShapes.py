@@ -1,3 +1,4 @@
+import time
 import Vector
 import Circle
 
@@ -13,8 +14,8 @@ def circleHLine(surface, drawList, position, radius):
 
 	# if next circles would be visible, draw next set
 	if radius >= 2:
-		circleLine(surface, drawList, position + Vector(radius, 0), radius / 2)
-		circleLine(surface, drawList, position - Vector(radius, 0), radius / 2)
+		circleHLine(surface, drawList, position + VectorInt(radius, 0), radius / 2)
+		circleHLine(surface, drawList, position - VectorInt(radius, 0), radius / 2)
 
 # Recursively draws circles in diamond
 def circleDiamond(surface, drawList, position, radius):
@@ -23,7 +24,7 @@ def circleDiamond(surface, drawList, position, radius):
 
 	# if next circles would be visible, draw next set
 	if radius >= 2:
-		circleDiamond(surface, drawList, position + Vector(radius, 0), radius / 2)
-		circleDiamond(surface, drawList, position - Vector(radius, 0), radius / 2)
-		circleDiamond(surface, drawList, position + Vector(0, radius), radius / 2)
-		circleDiamond(surface, drawList, position - Vector(0, radius), radius / 2)
+		circleDiamond(surface, drawList, position + VectorInt(radius, 0), radius / 2)
+		circleDiamond(surface, drawList, position - VectorInt(radius, 0), radius / 2)
+		circleDiamond(surface, drawList, position + VectorInt(0, radius), radius / 2)
+		circleDiamond(surface, drawList, position - VectorInt(0, radius), radius / 2)

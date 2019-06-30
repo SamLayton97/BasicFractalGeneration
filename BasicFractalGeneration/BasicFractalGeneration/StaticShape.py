@@ -10,7 +10,7 @@ class StaticShape:
 
 	# shape parameters
 	surface = None					# surface to draw shape on
-	position = Vector(0, 0)			# centre position on shape
+	position = VectorInt(0, 0)		# centre position on shape
 	color = Constants.COLOR_WHITE	# color of shape
 	width = 1						# width of shape's edge, 0 denotes shape is 'filled in'
 

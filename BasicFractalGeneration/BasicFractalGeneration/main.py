@@ -1,9 +1,11 @@
 # A basic fractal generation program
 import pygame
 import Constants
+import Vector
 import RecursiveShapes
 
 from pygame import *
+from Vector import *
 from RecursiveShapes import *
 
 # initialize pygame
@@ -18,7 +20,7 @@ clock = pygame.time.Clock()
 shapes = []
 
 # test current shape-drawing function
-RecursiveShapes.circleDiamond(screen, shapes, Vector(Constants.SCREEN_SIZE[0] / 2, Constants.SCREEN_SIZE[1] / 2), 150)
+RecursiveShapes.circleDiamond(screen, shapes, VectorInt(Constants.SCREEN_SIZE[0] / 2, Constants.SCREEN_SIZE[1] / 2), 150)
 
 # while user has not closed application
 hasQuit = False
