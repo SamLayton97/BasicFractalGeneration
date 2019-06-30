@@ -1,4 +1,3 @@
-
 # A basic fractal generation program
 
 import pygame

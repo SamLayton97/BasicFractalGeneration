@@ -1,4 +1,3 @@
-
 # Various application constants
 
 # display constants
