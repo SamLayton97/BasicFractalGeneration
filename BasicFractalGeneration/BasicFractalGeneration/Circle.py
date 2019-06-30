@@ -25,10 +25,6 @@ class Circle:
 		self.width = math.fabs(width)
 		self.color = color
 
-	# called once per frame
-	def update(self, surface):
-		self.draw(surface)
-
 	# draws circle onto the screen
 	def draw(self, surface):
-		pygame.draw.circle(surface, self.color, (self.position.x, self.position.y), int(self.radius), int(self.width))
+		pygame.draw.circle(surface, self.color, (int(self.position.x), int(self.position.y)), int(self.radius), int(self.width))
