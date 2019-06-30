@@ -19,7 +19,7 @@ clock = pygame.time.Clock()
 shapes = []
 
 # test current shape-drawing function
-RecursiveShapes.circleDiamond(screen, shapes, Vector(Constants.SCREEN_SIZE[0] / 2, Constants.SCREEN_SIZE[1] / 2), 150)
+#RecursiveShapes.circleDiamond(screen, shapes, Vector(Constants.SCREEN_SIZE[0] / 2, Constants.SCREEN_SIZE[1] / 2), 150)
 
 # while user has not closed application
 hasQuit = False
