@@ -15,6 +15,8 @@ def cantorSet(surface, drawList, start, length):
 	# draw horizontal line at latest position
 	drawList.append(Line(surface, start, start + VectorInt(length, 0), 1, Constants.COLOR_WHITE))
 
+	# TODO: draw next set of lines if length is greater than 2
+
 # Recursively draws circles in horizontal line
 def circleHLine(surface, drawList, position, radius):
 	# create circle
