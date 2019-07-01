@@ -19,6 +19,6 @@ class Circle(StaticShape):
 		self.radius = int(math.fabs(radius))
 
 	# draws circle onto the screen
-	def draw(self, surface):
-		pygame.draw.circle(surface, self.color, (self.position.x, self.position.y), self.radius, self.width)
+	def draw(self):
+		pygame.draw.circle(self.surface, self.color, (self.position.x, self.position.y), self.radius, self.width)
 		

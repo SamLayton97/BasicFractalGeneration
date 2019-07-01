@@ -24,5 +24,5 @@ class StaticShape:
 
 	# Draws shape onto specified surface.
 	# All child classes must override this method.
-	def draw(self, surface):
+	def draw(self):
 		pass

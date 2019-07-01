@@ -36,7 +36,7 @@ while not hasQuit:
 
 	# draw each shape onto screen
 	for currShape in shapes:
-		currShape.draw(screen)
+		currShape.draw()
 
 	# double buffer
 	pygame.display.flip()

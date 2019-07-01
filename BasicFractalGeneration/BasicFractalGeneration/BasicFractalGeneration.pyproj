@@ -30,6 +30,9 @@
     <Compile Include="Ellipse.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Line.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="main.py" />
     <Compile Include="RecursiveShapes.py">
       <SubType>Code</SubType>
