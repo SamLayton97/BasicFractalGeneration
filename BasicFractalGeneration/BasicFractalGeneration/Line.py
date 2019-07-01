@@ -23,3 +23,7 @@ class Line:
 		self.end = end
 		self.width = max(1, int(round(width)))
 		self.color = color
+
+	# draws line onto the screen
+	def draw(self):
+		pygame.draw.line(self.surface, self.color, (self.start.x, self.start.y), (self.end.x, self.end.y), self.width)

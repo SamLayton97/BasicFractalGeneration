@@ -3,10 +3,12 @@ import pygame
 import Constants
 import Vector
 import RecursiveShapes
+import Line
 
 from pygame import *
 from Vector import *
 from RecursiveShapes import *
+from Line import *
 
 # initialize pygame
 pygame.init()
@@ -19,8 +21,9 @@ clock = pygame.time.Clock()
 # container for each shape in fractal
 shapes = []
 
-# test current shape-drawing function
-RecursiveShapes.circleDiamond(screen, shapes, VectorInt(Constants.SCREEN_SIZE[0] / 2, Constants.SCREEN_SIZE[1] / 2), 150)
+shapes.append(Line(screen, VectorInt(Constants.SCREEN_SIZE[0] / 4, Constants.SCREEN_SIZE[1] / 2),
+				   VectorInt(Constants.SCREEN_SIZE[0] / 4 * 3, Constants.SCREEN_SIZE[1] / 2),
+				   1, Constants.COLOR_WHITE))
 
 # while user has not closed application
 hasQuit = False
