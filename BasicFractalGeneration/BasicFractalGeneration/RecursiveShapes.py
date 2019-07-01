@@ -1,11 +1,19 @@
+# Fractal-generating functions using basic, static shapes
+
 import time
+import Constants
 import Vector
+import Line
 import Circle
 
 from Vector import *
+from Line import *
 from Circle import *
 
-# Fractal-generating functions using basic, static shapes
+# Recursively draws classic, descending cantor set
+def cantorSet(surface, drawList, start, length):
+	# draw horizontal line at latest position
+	drawList.append(Line(surface, start, start + VectorInt(length, 0), 1, Constants.COLOR_WHITE))
 
 # Recursively draws circles in horizontal line
 def circleHLine(surface, drawList, position, radius):

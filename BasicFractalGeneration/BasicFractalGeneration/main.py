@@ -21,9 +21,8 @@ clock = pygame.time.Clock()
 # container for each shape in fractal
 shapes = []
 
-shapes.append(Line(screen, VectorInt(Constants.SCREEN_SIZE[0] / 4, Constants.SCREEN_SIZE[1] / 2),
-				   VectorInt(Constants.SCREEN_SIZE[0] / 4 * 3, Constants.SCREEN_SIZE[1] / 2),
-				   1, Constants.COLOR_WHITE))
+# test drawing a cantor set
+RecursiveShapes.cantorSet(screen, shapes, VectorInt(40, 40), 720)
 
 # while user has not closed application
 hasQuit = False
