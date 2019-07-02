@@ -3,12 +3,10 @@ import pygame
 import Constants
 import Vector
 import RecursiveShapes
-import Line
 
 from pygame import *
 from Vector import *
 from RecursiveShapes import *
-from Line import *
 
 # initialize pygame
 pygame.init()
