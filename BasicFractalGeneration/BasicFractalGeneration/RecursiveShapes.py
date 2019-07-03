@@ -22,7 +22,7 @@ def cantorSet(surface, drawList, start, length, deltaY):
 		cantorSet(surface, drawList, start + VectorInt(0, deltaY), length / 3, deltaY)
 		cantorSet(surface, drawList, start + VectorInt((2 * length) / 3, deltaY), length / 3, deltaY)
 
-# Generates classic Koch curve
+# Draws classic Koch curve
 def kochCurve(surface, curveStart, curveEnd):
 	# create lists storing current and next sets of lines
 	toCurve = []
@@ -39,7 +39,7 @@ def kochCurve(surface, curveStart, curveEnd):
 			# get vector defined by current line
 			lineVector = line.end - line.start
 			
-			# if next curve would be indiscernable, break from generation
+			# if next curve would be indistinguishable, break from generation
 			if lineVector.length() < 6:
 				generate = False
 				break
