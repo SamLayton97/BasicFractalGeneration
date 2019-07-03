@@ -22,23 +22,23 @@ def cantorSet(surface, drawList, start, length, deltaY):
 		cantorSet(surface, drawList, start + VectorInt(0, deltaY), length / 3, deltaY)
 		cantorSet(surface, drawList, start + VectorInt((2 * length) / 3, deltaY), length / 3, deltaY)
 
+# Generates classic Koch curve
 def kochCurve(surface, curveStart, curveEnd):
-	# create lists storing current set of lines and all lines to draw
-	currSet = []
-	drawList = []
+	# create lists storing current and next sets of lines
+	toCurve = []
+	curvedLines = []
 
 	# add first line to a list of lines to generate curves from
-	currSet.append(Line(surface, curveStart, curveEnd, 1, Constants.COLOR_WHITE))
+	toCurve.append(Line(surface, curveStart, curveEnd, 1, Constants.COLOR_WHITE))
 
 	# continue to generate Koch curves until break case is reached
 	generate = True
 	while generate:
 		# for each segment of curve
-		for line in currSet:
-			# get vector defined by line
+		for line in toCurve:
+			# get vector defined by current line
 			lineVector = line.end - line.start
-			nextSet = []
-
+			
 			# if next curve would be indiscernable, break from generation
 			if lineVector.length() < 6:
 				generate = False
@@ -46,29 +46,24 @@ def kochCurve(surface, curveStart, curveEnd):
 
 			# otherwise, using current line, find points of next Koch curve
 			scaledVector = lineVector.scale(1/3)
-			point2 = line.start + scaledVector
-			point4 = line.end - scaledVector
-			point5 = line.end
-			cos60 = math.cos(math.pi / 3)
-			sin60 = math.sin(math.pi / 3)
+			ascendingPoint = line.start + scaledVector
+			descendingPoint = line.end - scaledVector
 			risingVector = Vector((scaledVector.x * Constants.COS_60) - (scaledVector.y * Constants.SIN_60), 
 						 (scaledVector.x * Constants.SIN_60) + (scaledVector.y * Constants.COS_60))
-			point3 = point4 - risingVector
+			peakPoint = descendingPoint - risingVector
 
-			# rescale / create lines using points of curve
-			line.end = point2
-			nextSet.append(line)
-			nextSet.append(Line(surface, point2, point3, 1, Constants.COLOR_WHITE))
-			nextSet.append(Line(surface, point3, point4, 1, Constants.COLOR_WHITE))
-			nextSet.append(Line(surface, point4, point5, 1, Constants.COLOR_WHITE))
-			drawList = nextSet
+			# create / rescale lines using points of curve
+			curvedLines.append(Line(surface, ascendingPoint, peakPoint, 1, Constants.COLOR_WHITE))
+			curvedLines.append(Line(surface, peakPoint, descendingPoint, 1, Constants.COLOR_WHITE))
+			curvedLines.append(Line(surface, descendingPoint, line.end, 1, Constants.COLOR_WHITE))
+			line.end = ascendingPoint
+			curvedLines.append(line)
 
-		# TESTING: print points and break after 1 generation
-		for kochLine in drawList:
-			print(str(kochLine.start) + " " + str(kochLine.end))
-		generate = False
+		# set next loop to generate curves from next set
+		toCurve = curvedLines
 		
-	return drawList
+	# return list of curved lines to draw
+	return curvedLines
 
 # Recursively draws circles in horizontal line
 def circleHLine(surface, drawList, position, radius):
