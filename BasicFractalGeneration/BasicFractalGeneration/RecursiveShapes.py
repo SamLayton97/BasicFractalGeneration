@@ -22,9 +22,12 @@ def cantorSet(surface, drawList, start, length, deltaY):
 		cantorSet(surface, drawList, start + VectorInt(0, deltaY), length / 3, deltaY)
 		cantorSet(surface, drawList, start + VectorInt((2 * length) / 3, deltaY), length / 3, deltaY)
 
-def kochCurve(surface, drawList, curveStart, curveEnd):
-	# add first line to a list of lines to generate curves from
+def kochCurve(surface, curveStart, curveEnd):
+	# create lists storing current set of lines and all lines to draw
 	currSet = []
+	drawList = []
+
+	# add first line to a list of lines to generate curves from
 	currSet.append(Line(surface, curveStart, curveEnd, 1, Constants.COLOR_WHITE))
 
 	# continue to generate Koch curves until break case is reached
@@ -48,8 +51,8 @@ def kochCurve(surface, drawList, curveStart, curveEnd):
 			point5 = line.end
 			cos60 = math.cos(math.pi / 3)
 			sin60 = math.sin(math.pi / 3)
-			risingVector = Vector((scaledVector.x * cos60) - (scaledVector.y * sin60), 
-						 (scaledVector.x * sin60) + (scaledVector.y * cos60))
+			risingVector = Vector((scaledVector.x * Constants.COS_60) - (scaledVector.y * Constants.SIN_60), 
+						 (scaledVector.x * Constants.SIN_60) + (scaledVector.y * Constants.COS_60))
 			point3 = point4 - risingVector
 
 			# rescale / create lines using points of curve
