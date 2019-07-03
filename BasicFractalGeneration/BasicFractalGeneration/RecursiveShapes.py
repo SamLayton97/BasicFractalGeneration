@@ -1,6 +1,7 @@
 # Fractal-generating functions using basic, static shapes
 
 import time
+import math
 import Constants
 import Vector
 import Line
@@ -10,28 +11,61 @@ from Vector import *
 from Line import *
 from Circle import *
 
-# Recursively draws classic, descending cantor set
-# "I fear the Cantor Ternary Set"
+# Recursively draws classic Cantor Ternary Set
 def cantorSet(surface, drawList, start, length, deltaY):
 	# draw horizontal line at latest position
 	drawList.append(Line(surface, start, start + VectorInt(length, 0), 1, Constants.COLOR_WHITE))
 
-	# if next line set would be visible
+	# if next set of lines would be visible
 	if length > 2 and start.y + deltaY < Constants.SCREEN_SIZE[1]:
 		# draw next 2 lines in cantor set
 		cantorSet(surface, drawList, start + VectorInt(0, deltaY), length / 3, deltaY)
 		cantorSet(surface, drawList, start + VectorInt((2 * length) / 3, deltaY), length / 3, deltaY)
 
-def kochCurve(surface, lineList, curveStart, curveEnd):
-	print("I hate the Peano Space and the Koch Curve")
+def kochCurve(surface, drawList, curveStart, curveEnd):
+	# add first line to a list of lines to generate curves from
+	currSet = []
+	currSet.append(Line(surface, curveStart, curveEnd, 1, Constants.COLOR_WHITE))
 
-	# if draw list is empty, add line defined by start and end points
-	if len(lineList) < 1:
-		lineList.append(Line(surface, curveStart, curveEnd, 1, Constants.COLOR_WHITE))
+	# continue to generate Koch curves until break case is reached
+	generate = True
+	while generate:
+		# for each segment of curve
+		for line in currSet:
+			# get vector defined by line
+			lineVector = line.end - line.start
+			nextSet = []
 
-	# for each Koch line in curve
-	#for line in lineList:
+			# if next curve would be indiscernable, break from generation
+			if lineVector.length() < 6:
+				generate = False
+				break
+
+			# otherwise, using current line, find points of next Koch curve
+			scaledVector = lineVector.scale(1/3)
+			point2 = line.start + scaledVector
+			point4 = line.end - scaledVector
+			point5 = line.end
+			cos60 = math.cos(math.pi / 3)
+			sin60 = math.sin(math.pi / 3)
+			risingVector = Vector((scaledVector.x * cos60) - (scaledVector.y * sin60), 
+						 (scaledVector.x * sin60) + (scaledVector.y * cos60))
+			point3 = point4 - risingVector
+
+			# rescale / create lines using points of curve
+			line.end = point2
+			nextSet.append(line)
+			nextSet.append(Line(surface, point2, point3, 1, Constants.COLOR_WHITE))
+			nextSet.append(Line(surface, point3, point4, 1, Constants.COLOR_WHITE))
+			nextSet.append(Line(surface, point4, point5, 1, Constants.COLOR_WHITE))
+			drawList = nextSet
+
+		# TESTING: print points and break after 1 generation
+		for kochLine in drawList:
+			print(str(kochLine.start) + " " + str(kochLine.end))
+		generate = False
 		
+	return drawList
 
 # Recursively draws circles in horizontal line
 def circleHLine(surface, drawList, position, radius):
