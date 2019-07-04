@@ -16,7 +16,7 @@ class Polygon(StaticShape):
 	def __init__(self, surface, pointVectors, color, width):
 		super().__init__(surface, color, width)
 		
-		# clear coordinates and convert new point vectors to coordinate tuples
+		# convert new point vectors to coordinate tuples
 		self.coordinates = []
 		for vector in pointVectors:
 			self.coordinates.append(self.pointVectorToCoord(vector))
