@@ -6,10 +6,12 @@ import Constants
 import Vector
 import Line
 import Circle
+import Polygon
 
 from Vector import *
 from Line import *
 from Circle import *
+from Polygon import *
 
 # Recursively draws classic Cantor Ternary Set
 def cantorSet(surface, drawList, start, length, deltaY):
