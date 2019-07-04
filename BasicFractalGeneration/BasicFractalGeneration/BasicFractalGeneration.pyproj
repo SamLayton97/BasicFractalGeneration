@@ -34,6 +34,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="main.py" />
+    <Compile Include="Polygon.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="RecursiveShapes.py">
       <SubType>Code</SubType>
     </Compile>

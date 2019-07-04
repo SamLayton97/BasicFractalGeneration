@@ -3,10 +3,14 @@ import pygame
 import Constants
 import Vector
 import RecursiveShapes
+import Circle
+import Ellipse
 
 from pygame import *
 from Vector import *
 from RecursiveShapes import *
+from Circle import *
+from Ellipse import *
 
 # initialize pygame
 pygame.init()
@@ -20,8 +24,8 @@ clock = pygame.time.Clock()
 shapes = []
 
 # test drawing a cantor set
-shapes = RecursiveShapes.kochCurve(screen, VectorInt(0, Constants.SCREEN_SIZE[1] - 200), 
-						  VectorInt(Constants.SCREEN_SIZE[0], Constants.SCREEN_SIZE[1] - 200))
+#shapes = RecursiveShapes.kochCurve(screen, VectorInt(0, Constants.SCREEN_SIZE[1] - 200), 
+						  #VectorInt(Constants.SCREEN_SIZE[0], Constants.SCREEN_SIZE[1] - 200))
 
 # while user has not closed application
 hasQuit = False
