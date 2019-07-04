@@ -69,8 +69,6 @@ def kochCurve(surface, curveStart, curveEnd):
 
 # Draws the classic sierpinski triangle using polygons
 def sierpinskiTriangle(surface, centre, distFromCentre, isFilled):
-	print("draw sierpinski triangle")
-
 	# create lists storing current and next set of triangles
 	toBreak = []
 	brokenTriangles = []
@@ -120,8 +118,8 @@ def sierpinskiTriangle(surface, centre, distFromCentre, isFilled):
 			triangle.coordinates[2] = triangle.pointVectorToCoord(bisectorZ)
 			brokenTriangles.append(triangle)
 			
-		# TESTING: break after one generation
-		generate = False
+		# set next loop to generate sierpinski's triangle from new triangles
+		toBreak = brokenTriangles
 
 	# return list of 'broken' triangles to draw
 	return brokenTriangles
