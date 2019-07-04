@@ -67,7 +67,7 @@ def kochCurve(surface, curveStart, curveEnd):
 	# return list of curved lines to draw
 	return curvedLines
 
-# Draws the classic sierpinski triangle using polygons
+# Draws the classic sierpinski triangle using polygon objects
 def sierpinskiTriangle(surface, centre, distFromCentre, isFilled):
 	# create lists storing current and next set of triangles
 	toBreak = []
@@ -145,3 +145,10 @@ def circleDiamond(surface, drawList, position, radius):
 		circleDiamond(surface, drawList, position - VectorInt(radius, 0), radius / 2)
 		circleDiamond(surface, drawList, position + VectorInt(0, radius), radius / 2)
 		circleDiamond(surface, drawList, position - VectorInt(0, radius), radius / 2)
+
+# Recursively generate a tree with two main branches using lines
+def fractalTree(surface, drawList, trunkStart, trunkEnd, branchRotation):
+	print("fractal tree")
+
+	# create a line defined by trunk's start and end
+	drawList.append(Line(surface, trunkStart, trunkEnd, 1, Constants.COLOR_WHITE))

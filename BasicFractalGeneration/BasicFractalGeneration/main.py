@@ -21,8 +21,9 @@ clock = pygame.time.Clock()
 # container for each shape in fractal
 shapes = []
 
-# test drawing Sierpinski's triangle
-shapes = RecursiveShapes.sierpinskiTriangle(screen, VectorInt(Constants.SCREEN_SIZE[0] / 2, Constants.SCREEN_SIZE[1] / 2 + 60), 300, False)
+# test drawing a fractal tree
+RecursiveShapes.fractalTree(screen, shapes, VectorInt(Constants.SCREEN_SIZE[0] / 2, Constants.SCREEN_SIZE[1] - 50), 
+							VectorInt(Constants.SCREEN_SIZE[0] / 2, Constants.SCREEN_SIZE[1] / 2), 30)
 
 # while user has not closed application
 hasQuit = False
