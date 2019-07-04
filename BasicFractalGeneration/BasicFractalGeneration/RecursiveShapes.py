@@ -68,7 +68,7 @@ def kochCurve(surface, curveStart, curveEnd):
 	return curvedLines
 
 # Draws the classic sierpinski triangle using polygons
-def sierpinskiTriangle(surface, centre, size, isFilled):
+def sierpinskiTriangle(surface, centre, distFromCentre, isFilled):
 	print("draw sierpinski triangle")
 
 	# create lists storing current and next set of triangles
@@ -81,9 +81,9 @@ def sierpinskiTriangle(surface, centre, size, isFilled):
 		width = 0
 
 	# add first equilateral triangle to list of triangles to 'break down'
-	pointA = centre - VectorInt(0, size)
-	pointB = centre - VectorInt(size * Constants.SIN_120, size * Constants.COS_120)
-	pointC = centre - VectorInt(-1 * size * Constants.SIN_120, size * Constants.COS_120)
+	pointA = centre - VectorInt(0, distFromCentre)
+	pointB = centre - VectorInt(distFromCentre * Constants.SIN_120, distFromCentre * Constants.COS_120)
+	pointC = centre - VectorInt(-1 * distFromCentre * Constants.SIN_120, distFromCentre * Constants.COS_120)
 	toBreak.append(Polygon(surface, [pointA, pointB, pointC], Constants.COLOR_WHITE, width))
 
 	# TESTING: return first triangle
