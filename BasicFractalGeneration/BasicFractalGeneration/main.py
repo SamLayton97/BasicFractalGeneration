@@ -22,10 +22,15 @@ clock = pygame.time.Clock()
 shapes = []
 
 # test drawing a cantor set
-shapes = RecursiveShapes.kochCurve(screen, VectorInt(0, Constants.SCREEN_SIZE[1] - 200), 
-						  VectorInt(Constants.SCREEN_SIZE[0], Constants.SCREEN_SIZE[1] - 200))
+#shapes = RecursiveShapes.kochCurve(screen, VectorInt(0, Constants.SCREEN_SIZE[1] - 200), 
+						  #VectorInt(Constants.SCREEN_SIZE[0], Constants.SCREEN_SIZE[1] - 200))
 
+pointList = []
+pointList.append(VectorInt(50, 100))
+pointList.append(VectorInt(70, 180))
+pointList.append(VectorInt(200, 200))
 
+shapes.append(Polygon(screen, pointList, Constants.COLOR_WHITE, 0))
 
 # while user has not closed application
 hasQuit = False

@@ -18,7 +18,7 @@ class Polygon(StaticShape):
 		
 		# convert point vectors to drawable coordinate tuples
 		for vector in pointVectors:
-			coordinates.append(self.vectorToCoord(vector))
+			self.coordinates.append(self.pointVectorToCoord(vector))
 
 	# Displays polygon on the screen
 	def draw(self):
