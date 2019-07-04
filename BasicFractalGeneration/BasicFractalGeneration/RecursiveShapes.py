@@ -80,14 +80,51 @@ def sierpinskiTriangle(surface, centre, distFromCentre, isFilled):
 	if isFilled:
 		width = 0
 
-	# add first equilateral triangle to list of triangles to 'break down'
-	pointA = centre - VectorInt(0, distFromCentre)
-	pointB = centre - VectorInt(distFromCentre * Constants.SIN_120, distFromCentre * Constants.COS_120)
+	# add first equilateral triangle defined by points A, B, and C
+	pointA = centre - VectorInt(distFromCentre * Constants.SIN_120, distFromCentre * Constants.COS_120)
+	pointB = centre - VectorInt(0, distFromCentre)
 	pointC = centre - VectorInt(-1 * distFromCentre * Constants.SIN_120, distFromCentre * Constants.COS_120)
 	toBreak.append(Polygon(surface, [pointA, pointB, pointC], Constants.COLOR_WHITE, width))
 
-	# TESTING: return first triangle
-	return toBreak
+	# continue to generate sierpinski triangles until break case is reached
+	generate = True
+	while generate:
+		# for each sub-triangle in whole
+		for triangle in toBreak:
+			# get vector defined between two points
+			vectorAB = triangle.coordToPointVector(triangle.coordinates[1]) - triangle.coordToPointVector(triangle.coordinates[0])
+
+			# if next set of triangles would be indistinguishable, stop generating
+			if vectorAB.length() < 4:
+				generate = False
+				break
+
+			# otherwise, get vertices of current triangle
+			vertexA = triangle.coordToPointVector(triangle.coordinates[0])
+			vertexB = triangle.coordToPointVector(triangle.coordinates[1])
+			vertexC = triangle.coordToPointVector(triangle.coordinates[2])
+
+			# get vectors defined by other 2 sides of triangle
+			vectorBC = vertexC - vertexB
+			vectorAC = vertexC - vertexA
+
+			# find bisecting points (x, y, z) of each side
+			bisectorX = vertexA + vectorAB.scale(0.5)
+			bisectorY = vertexB + vectorBC.scale(0.5)
+			bisectorZ = vertexA + vectorAC.scale(0.5)
+
+			# create / rescale triangles using vertices and bisectors
+			brokenTriangles.append(Polygon(surface, [bisectorX, vertexB, bisectorY], Constants.COLOR_WHITE, width))
+			brokenTriangles.append(Polygon(surface, [bisectorZ, bisectorY, vertexC], Constants.COLOR_WHITE, width))
+			triangle.coordinates[1] = triangle.pointVectorToCoord(bisectorX)
+			triangle.coordinates[2] = triangle.pointVectorToCoord(bisectorZ)
+			brokenTriangles.append(triangle)
+			
+		# TESTING: break after one generation
+		generate = False
+
+	# return list of 'broken' triangles to draw
+	return brokenTriangles
 
 # Recursively draws circles in horizontal line
 def circleHLine(surface, drawList, position, radius):

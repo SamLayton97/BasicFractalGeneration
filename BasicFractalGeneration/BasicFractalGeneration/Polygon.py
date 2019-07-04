@@ -10,13 +10,14 @@ from StaticShape import *
 class Polygon(StaticShape):
 
 	# Public variables
-	coordinates = []
-
+	coordinates = None
+	
 	# Polygon constructor
 	def __init__(self, surface, pointVectors, color, width):
 		super().__init__(surface, color, width)
 		
-		# convert point vectors to drawable coordinate tuples
+		# clear coordinates and convert new point vectors to coordinate tuples
+		self.coordinates = []
 		for vector in pointVectors:
 			self.coordinates.append(self.pointVectorToCoord(vector))
 
