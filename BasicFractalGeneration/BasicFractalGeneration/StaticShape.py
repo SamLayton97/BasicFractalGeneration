@@ -21,6 +21,6 @@ class StaticShape:
 		self.width = int(math.fabs(width))
 
 	# Draws shape onto specified surface.
-	# All child classes must override this method.
+	# NOTE: All child classes must override this method.
 	def draw(self):
 		pass
