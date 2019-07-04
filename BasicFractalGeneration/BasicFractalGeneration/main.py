@@ -21,16 +21,21 @@ clock = pygame.time.Clock()
 # container for each shape in fractal
 shapes = []
 
-# test drawing a cantor set
+# test drawing a koch curve
 #shapes = RecursiveShapes.kochCurve(screen, VectorInt(0, Constants.SCREEN_SIZE[1] - 200), 
 						  #VectorInt(Constants.SCREEN_SIZE[0], Constants.SCREEN_SIZE[1] - 200))
 
+# test drawing a triangle
 pointList = []
 pointList.append(VectorInt(50, 100))
 pointList.append(VectorInt(70, 180))
 pointList.append(VectorInt(200, 200))
 
 shapes.append(Polygon(screen, pointList, Constants.COLOR_WHITE, 0))
+
+for point in shapes[0].coordinates:
+	print(point)
+	print(shapes[0].coordToPointVector(point))
 
 # while user has not closed application
 hasQuit = False
