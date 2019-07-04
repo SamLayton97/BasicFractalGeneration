@@ -12,7 +12,6 @@ class Ellipse(StaticShape):
 
 	# public variables
 	boundingRect = None
-	position = VectorInt(0, 0)
 
 	# ellipse constructor
 	def __init__(self, surface, position, color, width, dimensions):
