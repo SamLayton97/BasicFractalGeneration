@@ -67,6 +67,28 @@ def kochCurve(surface, curveStart, curveEnd):
 	# return list of curved lines to draw
 	return curvedLines
 
+# Draws the classic sierpinski triangle using polygons
+def sierpinskiTriangle(surface, centre, size, isFilled):
+	print("draw sierpinski triangle")
+
+	# create lists storing current and next set of triangles
+	toBreak = []
+	brokenTriangles = []
+
+	# set width/fill of triangles
+	width = 1
+	if isFilled:
+		width = 0
+
+	# add first equilateral triangle to list of triangles to 'break down'
+	pointA = centre - VectorInt(0, size)
+	pointB = centre - VectorInt(size * Constants.SIN_120, size * Constants.COS_120)
+	pointC = centre - VectorInt(-1 * size * Constants.SIN_120, size * Constants.COS_120)
+	toBreak.append(Polygon(surface, [pointA, pointB, pointC], Constants.COLOR_WHITE, width))
+
+	# TESTING: return first triangle
+	return toBreak
+
 # Recursively draws circles in horizontal line
 def circleHLine(surface, drawList, position, radius):
 	# create circle

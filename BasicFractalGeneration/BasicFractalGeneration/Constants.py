@@ -14,3 +14,5 @@ COLOR_WHITE = (255, 255, 255)
 # helpful math variables
 COS_60 = math.cos(math.pi / 3)
 SIN_60 = math.sin(math.pi / 3)
+COS_120 = math.cos(2 * math.pi / 3)
+SIN_120 = math.sin(2 * math.pi / 3)
