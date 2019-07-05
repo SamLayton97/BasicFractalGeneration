@@ -1,5 +1,6 @@
 # A basic fractal generation program
 import pygame
+import math
 import Constants
 import Vector
 import RecursiveShapes
@@ -22,8 +23,8 @@ clock = pygame.time.Clock()
 shapes = []
 
 # test drawing a fractal tree
-RecursiveShapes.fractalTree(screen, shapes, VectorInt(Constants.SCREEN_SIZE[0] / 2, Constants.SCREEN_SIZE[1] - 50), 
-							VectorInt(Constants.SCREEN_SIZE[0] / 2, Constants.SCREEN_SIZE[1] / 2), 30)
+RecursiveShapes.fractalTree(screen, shapes, VectorInt(Constants.SCREEN_SIZE[0] / 2, Constants.SCREEN_SIZE[1] - 25), 
+							VectorInt(Constants.SCREEN_SIZE[0] / 2, Constants.SCREEN_SIZE[1] / 2 + 75), math.pi / 6, 2 / 3)
 
 # while user has not closed application
 hasQuit = False

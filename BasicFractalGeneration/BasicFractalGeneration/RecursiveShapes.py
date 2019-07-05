@@ -146,9 +146,23 @@ def circleDiamond(surface, drawList, position, radius):
 		circleDiamond(surface, drawList, position + VectorInt(0, radius), radius / 2)
 		circleDiamond(surface, drawList, position - VectorInt(0, radius), radius / 2)
 
-# Recursively generate a tree with two main branches using lines
-def fractalTree(surface, drawList, trunkStart, trunkEnd, branchRotation):
-	print("fractal tree")
-
-	# create a line defined by trunk's start and end
+# Recursively generate a tree with two main branches.
+# NOTE: Branch rotation parameter is measured in radians.
+def fractalTree(surface, drawList, trunkStart, trunkEnd, branchRotation, branchDecay):
+	# create a line defined by trunk's points
 	drawList.append(Line(surface, trunkStart, trunkEnd, 1, Constants.COLOR_WHITE))
+
+	# if next branch generation would be visible
+	branchVector = (trunkEnd - trunkStart).scale(branchDecay)
+	if branchVector.length() > 2:
+		# find end points of next branch set
+		rightRotation = VectorInt(branchVector.x * math.cos(branchRotation) - branchVector.y * math.sin(branchRotation),
+						 branchVector.x * math.sin(branchRotation) + branchVector.y * math.cos(branchRotation))
+		leftRotation = VectorInt(branchVector.x * math.cos(-1 * branchRotation) - branchVector.y * math.sin(-1 * branchRotation),
+						 branchVector.x * math.sin(-1 * branchRotation) + branchVector.y * math.cos(-1 * branchRotation))
+		rightBranchTip = trunkEnd + rightRotation
+		leftBranchTip = trunkEnd + leftRotation
+
+		# recursively generate trees from resulting branches
+		fractalTree(surface, drawList, trunkEnd, rightBranchTip, branchRotation, branchDecay)
+		fractalTree(surface, drawList, trunkEnd, leftBranchTip, branchRotation, branchDecay)
