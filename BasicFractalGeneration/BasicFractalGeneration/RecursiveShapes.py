@@ -67,6 +67,10 @@ def kochCurve(surface, curveStart, curveEnd):
 	# return list of curved lines to draw
 	return curvedLines
 
+# Draws the more complicated Koch Snowflake
+def kochSnowflake(surface, centre, distFromCentre, isFilled):
+	print("koch snowflake")
+
 # Draws the classic sierpinski triangle using polygon objects
 def sierpinskiTriangle(surface, centre, distFromCentre, isFilled):
 	# create lists storing current and next set of triangles
