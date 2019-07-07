@@ -22,8 +22,8 @@ clock = pygame.time.Clock()
 # container for each shape in fractal
 shapes = []
 
-# test drawing a Koch snowflake
-RecursiveShapes.kochSnowflake(screen, VectorInt(Constants.SCREEN_SIZE[0] / 2, Constants.SCREEN_SIZE[1] / 2), 50, True)
+# test drawing a koch snowflake
+shapes.append(RecursiveShapes.kochSnowflake(screen, VectorInt(Constants.SCREEN_SIZE[0] / 2, Constants.SCREEN_SIZE[1] / 2), 100, False))
 
 # while user has not closed application
 hasQuit = False

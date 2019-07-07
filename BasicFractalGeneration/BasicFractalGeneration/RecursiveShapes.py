@@ -71,6 +71,19 @@ def kochCurve(surface, curveStart, curveEnd):
 def kochSnowflake(surface, centre, distFromCentre, isFilled):
 	print("koch snowflake")
 
+	# set fill of snowflake
+	width = 1
+	if isFilled:
+		width = 0
+
+	# create equilateral triangle defined by points A, B, and C
+	pointA = centre - VectorInt(distFromCentre * Constants.SIN_120, distFromCentre * Constants.COS_120)
+	pointB = centre - VectorInt(0, distFromCentre)
+	pointC = centre - VectorInt(-1 * distFromCentre * Constants.SIN_120, distFromCentre * Constants.COS_120)
+
+	# TESTING: return initial polygon
+	return Polygon(surface, [pointA, pointB, pointC], Constants.COLOR_WHITE, width)
+
 # Draws the classic sierpinski triangle using polygon objects
 def sierpinskiTriangle(surface, centre, distFromCentre, isFilled):
 	# create lists storing current and next set of triangles
