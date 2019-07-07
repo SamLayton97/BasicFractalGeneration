@@ -80,34 +80,40 @@ def kochSnowflake(surface, centre, distFromCentre, isFilled):
 	pointC = centre - VectorInt(-1 * distFromCentre * Constants.SIN_120, distFromCentre * Constants.COS_120)
 	snowflake = Polygon(surface, [pointA, pointB, pointC], Constants.COLOR_WHITE, width)
 
-	# create dictionary pairing coordinates with koch curves
-	kochCurves = {}
+	# continue to generate Koch snowflake until break case is reached
+	generate = True
+	while generate:
+		# create dictionary pairing coordinates with koch curves
+		kochCurves = {}
 
-	# for each coordinate defining the snowflake polygon
-	for i in range(len(snowflake.coordinates)):
-		# retrieve vector points of current and next coordinate
-		currPoint = snowflake.coordToPointVector(snowflake.coordinates[i])
-		nextPoint = None
-		if i >= len(snowflake.coordinates) - 1:
-			nextPoint = snowflake.coordToPointVector(snowflake.coordinates[0])
-		else:
-			nextPoint = snowflake.coordToPointVector(snowflake.coordinates[i + 1])
+		# for each coordinate defining the snowflake polygon
+		for i in range(len(snowflake.coordinates)):
+			# retrieve vector points of current and next coordinate
+			currPoint = snowflake.coordToPointVector(snowflake.coordinates[i])
+			nextPoint = None
+			if i >= len(snowflake.coordinates) - 1:
+				nextPoint = snowflake.coordToPointVector(snowflake.coordinates[0])
+			else:
+				nextPoint = snowflake.coordToPointVector(snowflake.coordinates[i + 1])
 
-		# get vector leading to next point
-		toNext = nextPoint - currPoint
+			# get vector leading to next point, breaking if it's too short to make curve from
+			toNext = nextPoint - currPoint
+			if toNext.length() < 6:
+				generate = False
+				break
 
-		# using new vector, find points of its Koch curve, adding them to dictionary of curves
-		scaledVector = toNext.scale(1/3)
-		risingVector = Vector((scaledVector.x * Constants.COS_60) - (scaledVector.y * Constants.SIN_60), 
-						(scaledVector.x * Constants.SIN_60) + (scaledVector.y * Constants.COS_60))
-		kochCurves[snowflake.coordinates[i]] = [snowflake.pointVectorToCoord(currPoint + scaledVector),
-				 snowflake.pointVectorToCoord(nextPoint - scaledVector - risingVector),
-				 snowflake.pointVectorToCoord(nextPoint - scaledVector)]
+			# using new vector, find points of its Koch curve, adding them to dictionary of curves
+			scaledVector = toNext.scale(1/3)
+			risingVector = Vector((scaledVector.x * Constants.COS_60) - (scaledVector.y * Constants.SIN_60), 
+							(scaledVector.x * Constants.SIN_60) + (scaledVector.y * Constants.COS_60))
+			kochCurves[snowflake.coordinates[i]] = [snowflake.pointVectorToCoord(currPoint + scaledVector),
+					 snowflake.pointVectorToCoord(nextPoint - scaledVector - risingVector),
+					 snowflake.pointVectorToCoord(nextPoint - scaledVector)]
 
-	# splice each curve into snowflake's set of coordinates
-	for neighborPoint in kochCurves:
-		insertIndex = snowflake.coordinates.index(neighborPoint) + 1
-		snowflake.coordinates = snowflake.coordinates[:insertIndex] + kochCurves[neighborPoint] + snowflake.coordinates[insertIndex:]
+		# splice each curve into snowflake's set of coordinates
+		for neighborPoint in kochCurves:
+			insertIndex = snowflake.coordinates.index(neighborPoint) + 1
+			snowflake.coordinates = snowflake.coordinates[:insertIndex] + kochCurves[neighborPoint] + snowflake.coordinates[insertIndex:]
 
 	# return resulting fractal
 	return snowflake
