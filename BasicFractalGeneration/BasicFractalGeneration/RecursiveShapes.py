@@ -69,20 +69,31 @@ def kochCurve(surface, curveStart, curveEnd):
 
 # Draws the more complicated Koch Snowflake
 def kochSnowflake(surface, centre, distFromCentre, isFilled):
-	print("koch snowflake")
-
 	# set fill of snowflake
 	width = 1
 	if isFilled:
 		width = 0
 
-	# create equilateral triangle defined by points A, B, and C
+	# create initial equilateral triangle defined by points A, B, and C
 	pointA = centre - VectorInt(distFromCentre * Constants.SIN_120, distFromCentre * Constants.COS_120)
 	pointB = centre - VectorInt(0, distFromCentre)
 	pointC = centre - VectorInt(-1 * distFromCentre * Constants.SIN_120, distFromCentre * Constants.COS_120)
+	snowflake = Polygon(surface, [pointA, pointB, pointC], Constants.COLOR_WHITE, width)
 
-	# TESTING: return initial polygon
-	return Polygon(surface, [pointA, pointB, pointC], Constants.COLOR_WHITE, width)
+	# for each coordinate defining the snowflake polygon
+	for i in range(len(snowflake.coordinates)):
+		# find vector to next point defining the snowflake
+		toNext = None
+		if i >= len(snowflake.coordinates) - 1:
+			toNext = snowflake.coordToPointVector(snowflake.coordinates[0]) - snowflake.coordToPointVector(snowflake.coordinates[i])
+		else:
+			toNext = snowflake.coordToPointVector(snowflake.coordinates[i + 1]) - snowflake.coordToPointVector(snowflake.coordinates[i])
+
+		# TESTING: print vector to next point
+		print(toNext)
+
+	# return resulting fractal
+	return snowflake
 
 # Draws the classic sierpinski triangle using polygon objects
 def sierpinskiTriangle(surface, centre, distFromCentre, isFilled):
