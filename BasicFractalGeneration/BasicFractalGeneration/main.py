@@ -18,6 +18,8 @@ pygame.init()
 pygame.display.set_caption(Constants.APP_NAME)
 screen = pygame.display.set_mode(Constants.SCREEN_SIZE)
 clock = pygame.time.Clock()
+if Constants.FULLSCREEN:
+	screen = pygame.display.set_mode(Constants.SCREEN_SIZE, pygame.FULLSCREEN)
 
 # container for each shape in fractal
 shapes = []
