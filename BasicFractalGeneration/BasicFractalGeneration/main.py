@@ -4,12 +4,10 @@ import math
 import Constants
 import Vector
 import RecursiveShapes
-import Polygon
 
 from pygame import *
 from Vector import *
 from RecursiveShapes import *
-from Polygon import *
 
 # initialize pygame
 pygame.init()
