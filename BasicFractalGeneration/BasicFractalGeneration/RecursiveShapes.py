@@ -222,11 +222,11 @@ def fractalTree(surface, drawList, trunkStart, trunkEnd, branchRotation, branchD
 # NOTE: Function assumes that curve list starts with a single line,
 # generating one left-centre screen if list is empty.
 def dragonCurve(surface, drawList):
-	# if list is empty, generate a line left-centre screen
+	# if list is empty, generate a line right-centre screen
 	if len(drawList) < 1:
 		drawList.append(Line(surface, 
-						VectorInt(Constants.SCREEN_SIZE[0] / 8, Constants.SCREEN_SIZE[1] / 2),
-						VectorInt(Constants.SCREEN_SIZE[0] / 8 + 20, Constants.SCREEN_SIZE[1] / 2),
+						VectorInt((3 * Constants.SCREEN_SIZE[0] / 4), Constants.SCREEN_SIZE[1] / 2),
+						VectorInt((3 * Constants.SCREEN_SIZE[0] / 4) + 10, Constants.SCREEN_SIZE[1] / 2),
 						1, 
 						Constants.COLOR_WHITE))
 

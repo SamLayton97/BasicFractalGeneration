@@ -4,7 +4,7 @@ import math
 
 # display constants
 APP_NAME = "Basic Fractal Generation"
-FULLSCREEN = False
+FULLSCREEN = True
 SCREEN_SIZE = [1920, 1080]
 FRAME_RATE = 60
 
