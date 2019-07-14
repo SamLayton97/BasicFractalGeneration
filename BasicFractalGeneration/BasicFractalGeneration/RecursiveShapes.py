@@ -217,3 +217,37 @@ def fractalTree(surface, drawList, trunkStart, trunkEnd, branchRotation, branchD
 		# recursively generate trees from resulting branches
 		fractalTree(surface, drawList, trunkEnd, rightBranchTip, branchRotation, branchDecay)
 		fractalTree(surface, drawList, trunkEnd, leftBranchTip, branchRotation, branchDecay)
+
+# Recursively generate a standard (90 degree) dragon curve.
+# NOTE: Function assumes that curve list starts with a single line,
+# generating one left-centre screen if list is empty.
+def dragonCurve(surface, drawList, color = Constants.COLOR_WHITE):
+	# if list is empty, generate a line left-centre screen
+	if len(drawList) < 1:
+		drawList.append(Line(surface, 
+						VectorInt(Constants.SCREEN_SIZE[0] / 8, Constants.SCREEN_SIZE[1] / 2),
+						VectorInt(Constants.SCREEN_SIZE[0] / 8 + 20, Constants.SCREEN_SIZE[1] / 2),
+						1, 
+						color))
+
+	# retrieve end point of curve to rotate next generation by
+	rotationPoint = drawList[len(drawList) - 1].end
+	print(rotationPoint)
+
+	# duplicate each line in current list, rotating it 90 degrees about end point
+	rotatedLines = []
+	for line in drawList:
+		rotationToStart = line.start - rotationPoint
+		rotationToEnd = line.end - rotationPoint
+		rotatedLines.append(Line(surface, 
+					   rotationPoint + VectorInt(-1 * rotationToEnd.y, rotationToEnd.x),
+					   rotationPoint + VectorInt(-1 * rotationToStart.y, rotationToStart.x),
+					   1,
+					   color))
+
+	# append resulting lines onto total list and determine whether to rotate again
+	drawList.extend(rotatedLines)
+	#if len(drawList) < 4:
+	#	dragonCurve(surface, drawList, (255, 0, 255))
+	#elif len(drawList) < 5:
+	#	dragonCurve(surface, drawList, (0, 255, 255))
