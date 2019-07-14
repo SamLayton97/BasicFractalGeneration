@@ -221,33 +221,40 @@ def fractalTree(surface, drawList, trunkStart, trunkEnd, branchRotation, branchD
 # Recursively generate a standard (90 degree) dragon curve.
 # NOTE: Function assumes that curve list starts with a single line,
 # generating one left-centre screen if list is empty.
-def dragonCurve(surface, drawList, color = Constants.COLOR_WHITE):
+def dragonCurve(surface, drawList):
 	# if list is empty, generate a line left-centre screen
 	if len(drawList) < 1:
 		drawList.append(Line(surface, 
 						VectorInt(Constants.SCREEN_SIZE[0] / 8, Constants.SCREEN_SIZE[1] / 2),
 						VectorInt(Constants.SCREEN_SIZE[0] / 8 + 20, Constants.SCREEN_SIZE[1] / 2),
 						1, 
-						color))
+						Constants.COLOR_WHITE))
 
 	# retrieve end point of curve to rotate next generation by
 	rotationPoint = drawList[len(drawList) - 1].end
-	print(rotationPoint)
 
-	# duplicate each line in current list, rotating it 90 degrees about end point
+	# for each line in current generation of curve
+	# NOTE: loop iterates downward so that last line added to this generation
+	# is the actual end of the curve to be rotated around.
 	rotatedLines = []
-	for line in drawList:
+	for i in reversed(range(len(drawList))):
+		# rotate line's points 90 degrees about rotation point
+		line = drawList[i]
 		rotationToStart = line.start - rotationPoint
 		rotationToEnd = line.end - rotationPoint
-		rotatedLines.append(Line(surface, 
-					   rotationPoint + VectorInt(-1 * rotationToEnd.y, rotationToEnd.x),
-					   rotationPoint + VectorInt(-1 * rotationToStart.y, rotationToStart.x),
-					   1,
-					   color))
+		rotatedStart = rotationPoint + VectorInt(-1 * rotationToEnd.y, rotationToEnd.x)
+		rotatedEnd = rotationPoint + VectorInt(-1 * rotationToStart.y, rotationToStart.x)
 
-	# append resulting lines onto total list and determine whether to rotate again
+		# if any point extends beyond screen dimensions, break from generation
+		if (max(rotatedStart.x, rotatedEnd.x) > Constants.SCREEN_SIZE[0] or
+			min(rotatedStart.x, rotatedEnd.x) < 0 or
+			max(rotatedStart.y, rotatedEnd.y) > Constants.SCREEN_SIZE[1] or
+			min(rotatedStart.y, rotatedEnd.y) < 0):
+				return
+		
+		# add new line to list defining new generation
+		rotatedLines.append(Line(surface, rotatedStart, rotatedEnd, 1, Constants.COLOR_WHITE))
+		
+	# append resulting lines onto total list and continue to generate
 	drawList.extend(rotatedLines)
-	#if len(drawList) < 4:
-	#	dragonCurve(surface, drawList, (255, 0, 255))
-	#elif len(drawList) < 5:
-	#	dragonCurve(surface, drawList, (0, 255, 255))
+	dragonCurve(surface, drawList)
